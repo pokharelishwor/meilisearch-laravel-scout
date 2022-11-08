@@ -155,7 +155,7 @@ class MeilisearchEngine extends Engine
      */
     public function mapIds($results)
     {
-        if (0 === count($results['hits'])) {
+        if (0 === count($results['estimatedTotalHits'])) {
             return collect();
         }
 
@@ -175,7 +175,7 @@ class MeilisearchEngine extends Engine
      */
     public function map(Builder $builder, $results, $model)
     {
-        if (is_null($results) || 0 === count($results['hits'])) {
+        if (is_null($results) || 0 === count($results['estimatedTotalHits'])) {
             return $model->newCollection();
         }
 
@@ -200,7 +200,7 @@ class MeilisearchEngine extends Engine
      */
     public function getTotalCount($results)
     {
-        return $results['nbHits'];
+        return $results['estimatedTotalHits'];
     }
 
     /**
